@@ -1,0 +1,101 @@
+cabal-version:   3.0
+name:            q2io-base
+version:         0.1.0.0
+
+-- synopsis:
+-- description:
+license:         Apache-2.0
+license-file:    LICENSE
+author:          kayvank
+maintainer:      kayvan@q2io.com
+
+-- copyright:
+build-type:      Simple
+extra-doc-files: CHANGELOG.md
+
+-- extra-source-files:
+common lang
+  default-language:   Haskell2010
+  default-extensions:
+    DeriveFoldable
+    DeriveFunctor
+    DeriveGeneric
+    DeriveLift
+    DeriveTraversable
+    ExplicitForAll
+    FlexibleContexts
+    GeneralizedNewtypeDeriving
+    ImportQualifiedPost
+    MultiParamTypeClasses
+    NumericUnderscores
+    ScopedTypeVariables
+    StandaloneDeriving
+
+  ghc-options:
+    -Wall -Wnoncanonical-monad-instances -Wunused-packages
+    -Wincomplete-uni-patterns -Wincomplete-record-updates
+    -Wredundant-constraints -Widentities
+
+library
+  import:           lang
+  exposed-modules:
+    Q2io.BuildTx
+    Q2io.Class
+    Q2io.Constants
+    Q2io.Lenses
+    Q2io.MonadLog
+    Q2io.NodeQueries
+    Q2io.PlutusLedger
+    Q2io.Scripts
+    Q2io.Utils
+    Q2io.Utxos
+
+  build-depends:
+    , aeson
+    , base
+    , bytestring
+    , containers
+    , dlist
+    , either-result
+    , exceptions
+    , katip
+    , lens
+    , mtl
+    , prettyprinter
+    , serialise
+    , strict-sop-core
+    , text
+    , time
+    , transformers
+
+  build-depends:
+    , cardano-api
+    , cardano-crypto-wrapper
+    , cardano-ledger-alonzo
+    , cardano-ledger-babbage
+    , cardano-ledger-byron
+    , cardano-ledger-core
+    , cardano-ledger-mary
+    , cardano-ledger-shelley
+    , cardano-slotting
+    , ouroboros-consensus
+    , ouroboros-consensus-cardano
+    , ouroboros-network-protocols
+    , plutus-ledger-api
+    , plutus-tx
+
+  hs-source-dirs:   lib
+  default-language: Haskell2010
+
+test-suite q2io-base-test
+  import:           lang
+  default-language: Haskell2010
+
+  -- other-modules:
+  -- other-extensions:
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   test
+  main-is:          Main.hs
+  build-depends:
+    , base
+    , q2io-base
